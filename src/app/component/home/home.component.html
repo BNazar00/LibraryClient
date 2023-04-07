@@ -1,0 +1,11 @@
+<h1>It is home page!</h1>
+
+<div class="div" [ngClass]="{'hide': authService.isLoggedIn()}">
+    <a href="/login">Login</a>
+    <br>
+    <a href="/register">Register</a>
+</div>
+
+<a [ngClass]="{'hide': !authService.isLoggedIn()}" (click)="authService.logout()">Logout</a>
+<br>
+<a (click)="sayHi()">Say hi!</a>

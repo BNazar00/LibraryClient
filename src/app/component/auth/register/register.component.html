@@ -1,0 +1,58 @@
+<div class="auth-component">
+    <form class="auth-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameErrorTpl">
+                <input nz-input formControlName="firstName" placeholder="First name"/>
+                <ng-template #firstNameErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please input your username!</ng-container>
+                    <ng-container *ngIf="control.hasError('minlength')">Name is too short!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="lastNameErrorTpl">
+                <input nz-input formControlName="lastName" placeholder="Last name"/>
+                <ng-template #lastNameErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please input your last name!</ng-container>
+                    <ng-container *ngIf="control.hasError('minlength')">Name is too short!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                <input  (blur)="onInputBlur()" nz-input formControlName="email" placeholder="Email" type="email"/>
+                <ng-template #emailErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('email')">The input is not valid email!</ng-container>
+                    <ng-container *ngIf="control.hasError('required')">Please input your email!</ng-container>
+                    <ng-container *ngIf="control.hasError('duplicated')">The email has already been used!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+                <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()"
+                       placeholder="Password"/>
+                <ng-template #passwordErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please input your password!</ng-container>
+                    <ng-container *ngIf="control.hasError('minlength')">Password is too short!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="confirmPasswordErrorTpl">
+                <input nz-input type="password" formControlName="confirm" placeholder="Confirm Password"/>
+                <ng-template #confirmPasswordErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
+                    <ng-container *ngIf="control.hasError('confirm')">Password is inconsistent!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <button class="auth-button" type="submit" nz-button nzType="primary">
+                    Submit
+                </button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>

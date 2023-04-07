@@ -35,9 +35,9 @@
                             }
                         ],
                         "styles": [
-                            "src/reset.scss",
-                            "src/theme.less",
-                            "src/styles.scss"
+                            "src/styles/reset.scss",
+                            "src/styles/theme.less",
+                            "src/styles/styles.scss"
                         ],
                         "scripts": []
                     },
