@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BASE_URL} from "../../../core/constants";
+import {BASE_URL} from "../../../../core/constants";
 import {tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 

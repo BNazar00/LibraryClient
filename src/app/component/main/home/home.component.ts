@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {AuthService} from "../../service/auth/auth.service";
+import {AuthService} from "../../../service/auth/auth.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-welcome',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })

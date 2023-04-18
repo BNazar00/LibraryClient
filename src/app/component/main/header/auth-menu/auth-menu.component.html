@@ -1,0 +1,15 @@
+<div class="dropdown-menu" nz-dropdown [nzDropdownMenu]="menu">
+    <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
+    <span class="ico_down" nz-icon nzType="down"></span>
+</div>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+        <ng-container *ngIf="!authService.isLoggedIn()">
+            <li nz-menu-item (click)="navigateTo('/login')">Login</li>
+            <li nz-menu-item (click)="navigateTo('/register')">Register</li>
+        </ng-container>
+        <ng-container *ngIf="authService.isLoggedIn()">
+            <li nz-menu-item nzDanger (click)="authService.logout()">Logout</li>
+        </ng-container>
+    </ul>
+</nz-dropdown-menu>

@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+.header-container {
+    height: 9vh;
+    background-color: $bg-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.5vw;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center
+}
+
+.logo {
+    img {
+        height: 50px;
+        width: auto;
+        margin-right: 10px;
+    }
+}
