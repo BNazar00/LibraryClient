@@ -1,17 +1,23 @@
 import {Component} from '@angular/core';
-import {AuthService} from "../../../service/auth/auth.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {BookPreview} from "../../../dto/book/book-preview.dto";
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-welcome',
+    selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-    constructor(public authService: AuthService, private message: NzMessageService) {
+    bestsellers: BookPreview[] = []
+    arrivals: BookPreview[] = []
+
+    constructor(private message: NzMessageService,
+                private router: Router
+    ) {
     }
 
-    sayHi = (): void => {
-        this.message.success("hi!");
+    onAllBooksButtonClick = () => {
+        this.router.navigate(["all-books"]);
     }
 }

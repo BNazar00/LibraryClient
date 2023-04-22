@@ -20,6 +20,12 @@ import {HomeComponent} from "./component/main/home/home.component";
 import {TestComponent} from "./component/main/admin/test/test.component";
 import {AdminGuard} from "./component/main/admin/admin.guard";
 import {AuthorsComponent} from "./component/main/home/authors/authors.component";
+import {BooksTableComponent} from './component/util/books-table/books-table.component';
+import {NzCardModule} from "ng-zorro-antd/card";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
+import {NzResultModule} from "ng-zorro-antd/result";
+import {NzEmptyModule} from "ng-zorro-antd/empty";
+import {NoDataComponent} from './component/util/exception-handler/no-data/no-data.component';
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -32,13 +38,12 @@ const appRoute: Routes = [
                 component: HomeComponent
             },
             {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
-            {path: "authors", component: AuthorsComponent}
+            {path: "authors", component: AuthorsComponent},
+            {path: '**', component: NotFoundComponent}
         ]
     },
     {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
     {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-    {path: 'register', component: RegisterComponent},
-    {path: '**', redirectTo: '' }
 ]
 
 @NgModule({
@@ -46,6 +51,8 @@ const appRoute: Routes = [
         AppComponent,
         TestComponent,
         HomeComponent
+        NotFoundComponent,
+        NoDataComponent
     ],
     imports: [
         BrowserModule,
@@ -54,7 +61,11 @@ const appRoute: Routes = [
         HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoute),
-        NzButtonModule
+        NzButtonModule,
+        NzCardModule,
+        NzTypographyModule,
+        NzResultModule,
+        NzEmptyModule
     ],
     providers: [
         {provide: NZ_I18N, useValue: en_US},

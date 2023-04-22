@@ -1,0 +1,10 @@
+<h2 nz-typography>{{title}}</h2>
+<div class="books-wrapper">
+    <nz-card class="book-card" (click)="goToBookDescription(book.id)" nzHoverable *ngFor="let book of books"
+             [nzCover]="coverTemplate">
+        <ng-template #coverTemplate>
+            <img [src]="book.photoUrl" alt="book"/>
+        </ng-template>
+        <nz-card-meta [nzTitle]="book.title"/>
+    </nz-card>
+</div>

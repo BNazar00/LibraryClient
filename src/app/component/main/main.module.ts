@@ -12,6 +12,7 @@ import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {AuthorsComponent} from "./home/authors/authors.component";
 import {BooksComponent} from "./home/books/books.component";
+import {NzCardModule} from "ng-zorro-antd/card";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {BooksComponent} from "./home/books/books.component";
         NzAvatarModule,
         NzDropDownModule,
         NzIconModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        NzCardModule
     ],
     exports: [MainComponent]
 })

@@ -1,2 +1,12 @@
-<h1>It is home page!</h1>
-<a (click)="sayHi()">Say hi!</a>
+<ng-container *ngIf="bestsellers.length !== 0">
+    <app-books-table [title]="'Bestsellers'" [books]="bestsellers"/>
+</ng-container>
+<ng-container *ngIf="arrivals.length !== 0">
+    <app-books-table [title]="'Latest Arrivals'" [books]="arrivals"/>
+    <button (click)="onAllBooksButtonClick()" class="button_all-books" nz-button nzType="default">
+        All books
+    </button>
+</ng-container>
+<ng-container *ngIf="arrivals.length === 0">
+    <div class="no-data-wrapper"><app-no-data/></div>
+</ng-container>
