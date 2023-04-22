@@ -23,6 +23,7 @@ import {AuthorsComponent} from "./component/main/home/authors/authors.component"
 import {BooksTableComponent} from './component/util/books-table/books-table.component';
 import {NzCardModule} from "ng-zorro-antd/card";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
+import {NotFoundComponent} from './component/util/exception-handler/not-found/not-found.component';
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NoDataComponent} from './component/util/exception-handler/no-data/no-data.component';
@@ -39,18 +40,21 @@ const appRoute: Routes = [
             },
             {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
             {path: "authors", component: AuthorsComponent},
-            {path: '**', component: NotFoundComponent}
+            {path: "not-found", component: NotFoundComponent},
         ]
     },
     {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
     {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+    {path: 'register', component: RegisterComponent},
+    {path: '**', redirectTo: "not-found"}
 ]
 
 @NgModule({
     declarations: [
         AppComponent,
         TestComponent,
-        HomeComponent
+        HomeComponent,
+        BooksTableComponent,
         NotFoundComponent,
         NoDataComponent
     ],
