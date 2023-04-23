@@ -42,6 +42,7 @@ const appRoute: Routes = [
             {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
             {path: "authors", component: AuthorsComponent},
             {path: "form-reader-ticket", component: FormReaderTicketComponent},
+            {path: "add-book", component: AddBookComponent, canActivate: [AdminGuard]},
             {path: "not-found", component: NotFoundComponent},
         ]
     },

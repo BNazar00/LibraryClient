@@ -1,0 +1,40 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Title</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <input nz-input
+                   formControlName="title"
+                   placeholder="Input book's title">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Publication year</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <input nz-input
+                   formControlName="publicationYear"
+                   placeholder="Input book's publication year"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Page count</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <input nz-input
+                   formControlName="pageCount"
+                   placeholder="Input book's page count"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Price</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <input nz-input
+                   formControlName="price"
+                   placeholder="Input book's price"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control [nzOffset]="4">
+            <button nz-button nzType="primary">Confirm</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>

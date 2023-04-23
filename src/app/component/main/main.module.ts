@@ -18,6 +18,7 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AddBookComponent} from './admin/add-book/add-book.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         AuthorsComponent,
         BooksComponent,
         FormReaderTicketComponent,
+        AddBookComponent
     ],
     imports: [
         NgClass,
