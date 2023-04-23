@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
-import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {HeaderComponent} from "./header/header.component";
 import {NzButtonModule} from "ng-zorro-antd/button";
@@ -13,6 +13,11 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {AuthorsComponent} from "./home/authors/authors.component";
 import {BooksComponent} from "./home/books/books.component";
 import {NzCardModule} from "ng-zorro-antd/card";
+import { FormReaderTicketComponent } from './user/form-reader-ticket/form-reader-ticket.component';
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -21,7 +26,8 @@ import {NzCardModule} from "ng-zorro-antd/card";
         NavMenuComponent,
         AuthMenuComponent,
         AuthorsComponent,
-        BooksComponent
+        BooksComponent,
+        FormReaderTicketComponent,
     ],
     imports: [
         NgClass,
@@ -33,7 +39,15 @@ import {NzCardModule} from "ng-zorro-antd/card";
         NzDropDownModule,
         NzIconModule,
         NgOptimizedImage,
-        NzCardModule
+        NzCardModule,
+        RouterLinkActive,
+        RouterLink,
+        NzFormModule,
+        NzInputModule,
+        NzSelectModule,
+        FormsModule,
+        NgForOf,
+        ReactiveFormsModule
     ],
     exports: [MainComponent]
 })

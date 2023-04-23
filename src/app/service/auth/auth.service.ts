@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BASE_URL, ROLE_DATA} from "../../core/constants";
+import {BASE_URL} from "../../core/constant/constants";
 import {HttpClient} from "@angular/common/http";
 import {AuthenticationRequest} from "../../dto/auth/authentication-request.dto";
 import {AuthenticationResponse} from "../../dto/auth/authentication-response.dto";
@@ -7,6 +7,7 @@ import {Observable, tap} from "rxjs";
 import {RegisterRequest} from "../../dto/auth/register-request.dto";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {ROLE} from "../../core/constant/role.enum";
 
 @Injectable({
     providedIn: 'root'
@@ -39,6 +40,7 @@ export class AuthService {
             next: () => {
                 localStorage.removeItem('access_token');
                 this.message.success("You've been successfully logged out!")
+                this.router.navigate(['']);
             },
             error: (error) => {
                 this.message.error("HTTP request failed: ", error);
@@ -47,31 +49,26 @@ export class AuthService {
     }
 
     isLoggedIn = (): boolean => {
+        return this.isUserHasRoles([]);
+    }
+
+    isUserHasRoles = (roles: ROLE[]): boolean => {
         const token = localStorage.getItem('access_token');
         if (!token) {
             return false;
         }
+
         const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+
         const expiresAt = new Date(tokenPayload.exp).valueOf() * 1000;
-        return new Date().getTime() < expiresAt;
-    }
-
-    isAdmin = (): boolean => {
-        const token = localStorage.getItem('access_token');
-        if (!token) {
+        if (new Date().getTime() > expiresAt) {
             return false;
         }
-        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-        return JSON.parse(tokenPayload.roles).includes(ROLE_DATA.ADMIN);
-    }
-
-    isUser = (): boolean => {
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-            return false;
+        if (roles.length === 0) {
+            return true;
         }
-        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-        return JSON.parse(tokenPayload.roles).includes(ROLE_DATA.USER);
+        const userRoles = JSON.parse(tokenPayload.roles);
+        return roles.every(role => userRoles.includes(role));
     }
 
     private setSession = (authResult: AuthenticationResponse): void => {

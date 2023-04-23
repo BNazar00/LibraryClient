@@ -27,6 +27,7 @@ import {NotFoundComponent} from './component/util/exception-handler/not-found/no
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NoDataComponent} from './component/util/exception-handler/no-data/no-data.component';
+import {FormReaderTicketComponent} from "./component/main/user/form-reader-ticket/form-reader-ticket.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -40,6 +41,7 @@ const appRoute: Routes = [
             },
             {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
             {path: "authors", component: AuthorsComponent},
+            {path: "form-reader-ticket", component: FormReaderTicketComponent},
             {path: "not-found", component: NotFoundComponent},
         ]
     },

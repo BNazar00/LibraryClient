@@ -24,7 +24,7 @@ export class LoginComponent {
                 private router: Router,
                 private message: NzMessageService) {
         this.validateForm = this.fb.group({
-            email: ['test@gmail.com', [Validators.email, Validators.required, this.loginDataValidator]],
+            email: ['user@gmail.com', [Validators.email, Validators.required, this.loginDataValidator]],
             password: ['test', [Validators.required, Validators.minLength(4), this.loginDataValidator]]
         });
     }

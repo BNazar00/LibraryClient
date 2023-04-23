@@ -1,0 +1,42 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" nzRequired>Address</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <input nz-input
+                   formControlName="address"
+                   placeholder="Input your address">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" nzRequired>Activity type</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <nz-select formControlName="activityTypeId"
+                       nzSize="default"
+                       nzShowSearch
+                       nzPlaceHolder="Choose your activity type">
+                <nz-option *ngFor="let type of activityTypes" [nzLabel]="type.name" [nzValue]="type.id"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" nzRequired>Phone number</nz-form-label>
+        <nz-form-control
+            nzHasFeedback
+            [nzSm]="14"
+            nzErrorTip="Please input valid phone number">
+            <nz-input-group nzCompact nzAddOnBefore="+38" nzAddOnAfterIcon="phone">
+                <input
+                    nz-input
+                    type="text"
+                    formControlName="phoneNumber"
+                    [pattern]="'^(0)[0-9]{9}$'"
+                />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control [nzOffset]="3">
+            <button nz-button nzType="primary">Confirm</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
