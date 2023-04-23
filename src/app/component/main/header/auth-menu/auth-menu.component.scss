@@ -7,3 +7,11 @@
 .ico_down {
     margin: 5px;
 }
+nz-dropdown-menu {
+    min-width: 200px; /* set the minimum width here */
+}
+
+.ant-dropdown-menu-item {
+    min-width: 100px;
+    justify-content: space-between;
+}

@@ -2,6 +2,7 @@
 
 .header-container {
     height: 9vh;
+    overflow: hidden;
     background-color: $bg-color-2;
     display: flex;
     justify-content: space-between;
@@ -20,5 +21,6 @@
         height: 50px;
         width: auto;
         margin-right: 10px;
+        cursor: pointer;
     }
 }

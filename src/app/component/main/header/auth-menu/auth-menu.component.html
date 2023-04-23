@@ -5,7 +5,9 @@
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>
         <ng-container *ngIf="!authService.isLoggedIn()">
-            <li nz-menu-item (click)="navigateTo('/login')">Login</li>
+            <li nz-menu-item (click)="navigateTo('/login')">
+                Login
+            </li>
             <li nz-menu-item (click)="navigateTo('/register')">Register</li>
         </ng-container>
         <ng-container *ngIf="authService.isUserHasRoles([ROLE.USER]) && !authService.isUserHasRoles([ROLE.READER])">
@@ -14,8 +16,26 @@
                 Get reader ticket
             </li>
         </ng-container>
+        <ng-container *ngIf="authService.isUserHasRoles([ROLE.READER])">
+            <li nz-menu-item [nzSelected]="router.url === '/become-an-author'"
+                (click)="navigateTo('/my-books')">
+                My books
+            </li>
+        </ng-container>
+        <ng-container *ngIf="authService.isUserHasRoles([ROLE.ADMIN])">
+            <li nz-submenu nzTitle="Books">
+                <ul>
+                    <li nz-menu-item [nzSelected]="router.url === '/become-an-author'"
+                        (click)="navigateTo('/add-book')">
+                        Add a book
+                    </li>
+                </ul>
+            </li>
+        </ng-container>
         <ng-container *ngIf="authService.isLoggedIn()">
-            <li nz-menu-item nzDanger (click)="authService.logout()">Logout</li>
+            <li nz-menu-item nzDanger (click)="authService.logout()">
+                Logout
+            </li>
         </ng-container>
     </ul>
 </nz-dropdown-menu>
