@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgTemplateOutlet} from "@angular/common";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {HeaderComponent} from "./header/header.component";
@@ -13,12 +13,17 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {AuthorsComponent} from "./home/authors/authors.component";
 import {BooksComponent} from "./home/books/books.component";
 import {NzCardModule} from "ng-zorro-antd/card";
-import { FormReaderTicketComponent } from './user/form-reader-ticket/form-reader-ticket.component';
+import {FormReaderTicketComponent} from './user/form-reader-ticket/form-reader-ticket.component';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {MyBooksComponent} from './user/reader/my-books/my-books.component';
+import {BooksTableComponent} from "../util/books-table/books-table.component";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {AddBookComponent} from './admin/add-book/add-book.component';
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 
 @NgModule({
     declarations: [
@@ -29,6 +34,8 @@ import {AddBookComponent} from './admin/add-book/add-book.component';
         AuthorsComponent,
         BooksComponent,
         FormReaderTicketComponent,
+        BooksTableComponent,
+        MyBooksComponent,
         AddBookComponent
     ],
     imports: [
@@ -49,9 +56,13 @@ import {AddBookComponent} from './admin/add-book/add-book.component';
         NzSelectModule,
         FormsModule,
         NgForOf,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NzCheckboxModule,
+        NzTypographyModule,
+        NgTemplateOutlet,
+        NzInputNumberModule
     ],
-    exports: [MainComponent]
+    exports: [MainComponent, BooksTableComponent]
 })
 export class MainModule {
 }
