@@ -17,7 +17,7 @@
             </li>
         </ng-container>
         <ng-container *ngIf="authService.isUserHasRoles([ROLE.READER])">
-            <li nz-menu-item [nzSelected]="router.url === '/become-an-author'"
+            <li nz-menu-item [nzSelected]="router.url === '/my-books'"
                 (click)="navigateTo('/my-books')">
                 My books
             </li>
@@ -25,8 +25,8 @@
         <ng-container *ngIf="authService.isUserHasRoles([ROLE.ADMIN])">
             <li nz-submenu nzTitle="Books">
                 <ul>
-                    <li nz-menu-item [nzSelected]="router.url === '/become-an-author'"
-                        (click)="navigateTo('/add-book')">
+                    <li nz-menu-item [nzSelected]="router.url === '/admin/add-book'"
+                        (click)="navigateTo('/admin/add-book')">
                         Add a book
                     </li>
                 </ul>

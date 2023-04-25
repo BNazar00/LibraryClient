@@ -20,7 +20,6 @@ import {HomeComponent} from "./component/main/home/home.component";
 import {TestComponent} from "./component/main/admin/test/test.component";
 import {AdminGuard} from "./component/main/admin/admin.guard";
 import {AuthorsComponent} from "./component/main/home/authors/authors.component";
-import {BooksTableComponent} from './component/util/books-table/books-table.component';
 import {NzCardModule} from "ng-zorro-antd/card";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NotFoundComponent} from './component/util/exception-handler/not-found/not-found.component';
@@ -28,6 +27,9 @@ import {NzResultModule} from "ng-zorro-antd/result";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NoDataComponent} from './component/util/exception-handler/no-data/no-data.component';
 import {FormReaderTicketComponent} from "./component/main/user/form-reader-ticket/form-reader-ticket.component";
+import {MyBooksComponent} from "./component/main/user/reader/my-books/my-books.component";
+import {AddBookComponent} from "./component/main/admin/add-book/add-book.component";
+import {UserGuard} from "./component/main/user/user.guard";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -35,21 +37,20 @@ const appRoute: Routes = [
         path: "",
         component: MainComponent,
         children: [
-            {
-                path: '',
-                component: HomeComponent
-            },
-            {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
+            {path: "", component: HomeComponent},
+            {path: "admin/hi", component: TestComponent, canActivate: [AdminGuard]},
             {path: "authors", component: AuthorsComponent},
-            {path: "form-reader-ticket", component: FormReaderTicketComponent},
-            {path: "add-book", component: AddBookComponent, canActivate: [AdminGuard]},
+            {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
+            {path: "my-books", component: MyBooksComponent, canActivate: [UserGuard]},
+
+            {path: "admin/add-book", component: AddBookComponent, canActivate: [AdminGuard]},
+
             {path: "not-found", component: NotFoundComponent},
         ]
     },
-    {path: "admin", component: TestComponent, canActivate: [AuthGuard, AdminGuard]},
-    {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-    {path: 'register', component: RegisterComponent},
-    {path: '**', redirectTo: "not-found"}
+    {path: "login", component: LoginComponent, canActivate: [AuthGuard]},
+    {path: "register", component: RegisterComponent},
+    {path: "**", redirectTo: "not-found"}
 ]
 
 @NgModule({
@@ -57,7 +58,6 @@ const appRoute: Routes = [
         AppComponent,
         TestComponent,
         HomeComponent,
-        BooksTableComponent,
         NotFoundComponent,
         NoDataComponent
     ],

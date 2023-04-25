@@ -20,7 +20,7 @@ export class AdminGuard {
             return true;
         }
 
-        this.router.navigate(['']);
+        this.router.navigate(["not-found"]);
         return false;
     }
 }
