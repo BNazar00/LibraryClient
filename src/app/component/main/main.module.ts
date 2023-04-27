@@ -24,6 +24,7 @@ import {BooksTableComponent} from "../util/books-table/books-table.component";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {AddBookComponent} from './admin/add-book/add-book.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 
 @NgModule({
     declarations: [
@@ -60,7 +61,8 @@ import {NzInputNumberModule} from "ng-zorro-antd/input-number";
         NzCheckboxModule,
         NzTypographyModule,
         NgTemplateOutlet,
-        NzInputNumberModule
+        NzInputNumberModule,
+        NzAutocompleteModule
     ],
     exports: [MainComponent, BooksTableComponent]
 })

@@ -8,6 +8,26 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Select an author</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <nz-select formControlName="authorId"
+                       nzShowSearch
+                       nzPlaceHolder="Select an author">
+                <nz-option *ngFor="let author of authors" [nzLabel]="author.firstName + ' ' + author.lastName" [nzValue]="author.id"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Select a publisher</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <nz-select formControlName="publisherId"
+                       nzShowSearch
+                       nzPlaceHolder="Select a publisher">
+                <nz-option *ngFor="let publisher of publishers" [nzLabel]="publisher.name" [nzValue]="publisher.id"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
         <nz-form-label [nzSm]="4" nzRequired>Publication year</nz-form-label>
         <nz-form-control nzHasFeedback [nzSm]="14">
             <input nz-input
@@ -24,14 +44,13 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-label [nzSm]="4" nzRequired>Price</nz-form-label>
+        <nz-form-label [nzSm]="4" nzRequired>Price per day</nz-form-label>
         <nz-form-control nzHasFeedback [nzSm]="14">
             <input nz-input
                    formControlName="price"
-                   placeholder="Input book's price"/>
+                   placeholder="Input book's price per day"/>
         </nz-form-control>
     </nz-form-item>
-
     <nz-form-item>
         <nz-form-control [nzOffset]="4">
             <button nz-button nzType="primary">Confirm</button>
