@@ -17,7 +17,6 @@ import {Interceptor} from "./service/auth/auth-interceptor.service";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {MainModule} from "./component/main/main.module";
 import {HomeComponent} from "./component/main/home/home.component";
-import {TestComponent} from "./component/main/admin/test/test.component";
 import {AdminGuard} from "./component/main/admin/admin.guard";
 import {AuthorsComponent} from "./component/main/home/authors/authors.component";
 import {NzCardModule} from "ng-zorro-antd/card";
@@ -30,6 +29,7 @@ import {FormReaderTicketComponent} from "./component/main/user/form-reader-ticke
 import {MyBooksComponent} from "./component/main/user/reader/my-books/my-books.component";
 import {AddBookComponent} from "./component/main/admin/add-book/add-book.component";
 import {UserGuard} from "./component/main/user/user.guard";
+import {AllBooksComponent} from "./component/main/admin/all-books/all-books.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -38,12 +38,12 @@ const appRoute: Routes = [
         component: MainComponent,
         children: [
             {path: "", component: HomeComponent},
-            {path: "admin/hi", component: TestComponent, canActivate: [AdminGuard]},
             {path: "authors", component: AuthorsComponent},
             {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
             {path: "my-books", component: MyBooksComponent, canActivate: [UserGuard]},
 
             {path: "admin/add-book", component: AddBookComponent, canActivate: [AdminGuard]},
+            {path: "admin/all-books", component: AllBooksComponent, canActivate: [AdminGuard]},
 
             {path: "not-found", component: NotFoundComponent},
         ]
@@ -56,10 +56,8 @@ const appRoute: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        TestComponent,
         HomeComponent,
-        NotFoundComponent,
-        NoDataComponent
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,

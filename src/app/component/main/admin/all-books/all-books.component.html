@@ -1,0 +1,61 @@
+<nz-table #table
+          nzTableLayout="fixed"
+          [nzNoResult]="noDataTpl"
+          [nzData]="listOfDisplayData"
+          [nzPageSize]="9">
+    <thead>
+    <tr>
+        <th nzCustomFilter nzWidth="25%" scope="col"
+            [nzSortFn]="listOfColumn[0].compare"
+            [nzSortPriority]="listOfColumn[0].priority"
+        >
+            Title
+            <nz-filter-trigger [(nzVisible)]="searchVisible" [nzActive]="searchValue.length > 0"
+                               [nzDropdownMenu]="menu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th *ngFor="let column of listOfColumn.slice(1)" scope="col"
+            [nzSortFn]="column.compare"
+            [nzSortPriority]="column.priority">
+            {{ column.title }}
+        </th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of table.data">
+        <ng-container *ngIf="!editCache[book.id].edit; else editTemplate">
+            <td>{{ book.title }}</td>
+            <td>{{ book.publicationYear }}</td>
+            <td>{{ book.pageCount }}</td>
+            <td>{{ book.price }}</td>
+            <td><a (click)="startEdit(book.id)">Edit</a></td>
+        </ng-container>
+        <ng-template #editTemplate>
+            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.title"/></td>
+            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.publicationYear"/></td>
+            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.pageCount"/></td>
+            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.price"/></td>
+            <td>
+                <a (click)="saveEdit(book.id)" class="save">Save </a>
+                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(book.id)">Cancel</a>
+            </td>
+        </ng-template>
+    </tr>
+    </tbody>
+</nz-table>
+<ng-template #noDataTpl>
+    <div class="not-data-wrapper">
+        <app-no-data/>
+    </div>
+</ng-template>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue"/>
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSearch()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

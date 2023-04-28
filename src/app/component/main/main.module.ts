@@ -25,6 +25,11 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {AddBookComponent} from './admin/add-book/add-book.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
+import {AllBooksComponent} from './admin/all-books/all-books.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import {NoDataComponent} from "../util/exception-handler/no-data/no-data.component";
+import {NzEmptyModule} from "ng-zorro-antd/empty";
 
 @NgModule({
     declarations: [
@@ -37,7 +42,9 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
         FormReaderTicketComponent,
         BooksTableComponent,
         MyBooksComponent,
-        AddBookComponent
+        AddBookComponent,
+        AllBooksComponent,
+        NoDataComponent
     ],
     imports: [
         NgClass,
@@ -62,9 +69,12 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
         NzTypographyModule,
         NgTemplateOutlet,
         NzInputNumberModule,
-        NzAutocompleteModule
+        NzAutocompleteModule,
+        NzTableModule,
+        NzPopconfirmModule,
+        NzEmptyModule
     ],
-    exports: [MainComponent, BooksTableComponent]
+    exports: [MainComponent, BooksTableComponent, NoDataComponent]
 })
 export class MainModule {
 }
