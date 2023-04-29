@@ -13,8 +13,43 @@
             <nz-select formControlName="authorId"
                        nzShowSearch
                        nzPlaceHolder="Select an author">
-                <nz-option *ngFor="let author of authors" [nzLabel]="author.firstName + ' ' + author.lastName" [nzValue]="author.id"></nz-option>
+                <nz-option *ngFor="let author of authors"
+                           [nzLabel]="author.firstName + ' ' + author.lastName"
+                           [nzValue]="author.id"></nz-option>
             </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>Upload a cover</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14">
+            <nz-upload
+                id="upload"
+                nzName="image"
+                [nzAction]="BASE_URL + '/upload-image'"
+                nzListType="picture-card"
+                [(nzFileList)]="fileList"
+                [nzShowButton]="fileList.length < 1"
+                [nzShowUploadList]="uploadConfig"
+                [nzPreview]="handlePreview"
+                [nzRemove]="onImageDelete"
+                (nzChange)="handleChange($event)"
+            >
+                <div style="color: #5b5b5b">
+                    <span nz-icon nzType="plus"></span>
+                    <div style="margin-top: 8px">Upload</div>
+                </div>
+            </nz-upload>
+            <nz-modal
+                nzCentered
+                [nzVisible]="previewVisible"
+                [nzBodyStyle]="{ height: '80vh' }"
+                [nzWidth]="'fit-content'"
+                [nzContent]="modalContent"
+                [nzFooter]="null"
+                (nzOnCancel)="previewVisible = false"
+            >
+                <ng-container [ngTemplateOutlet]="modalContent"></ng-container>
+            </nz-modal>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -23,7 +58,9 @@
             <nz-select formControlName="publisherId"
                        nzShowSearch
                        nzPlaceHolder="Select a publisher">
-                <nz-option *ngFor="let publisher of publishers" [nzLabel]="publisher.name" [nzValue]="publisher.id"></nz-option>
+                <nz-option *ngFor="let publisher of publishers"
+                           [nzLabel]="publisher.name"
+                           [nzValue]="publisher.id"></nz-option>
             </nz-select>
         </nz-form-control>
     </nz-form-item>
@@ -57,3 +94,6 @@
         </nz-form-control>
     </nz-form-item>
 </form>
+<ng-template #modalContent>
+    <img [src]="previewImage" [ngStyle]="{ height: '100%' }" alt="preview"/>
+</ng-template>

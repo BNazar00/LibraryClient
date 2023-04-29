@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgTemplateOutlet} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, NgTemplateOutlet} from "@angular/common";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {HeaderComponent} from "./header/header.component";
@@ -30,6 +30,8 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NoDataComponent} from "../util/exception-handler/no-data/no-data.component";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
+import {NzUploadModule} from "ng-zorro-antd/upload";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 @NgModule({
     declarations: [
@@ -72,7 +74,10 @@ import {NzEmptyModule} from "ng-zorro-antd/empty";
         NzAutocompleteModule,
         NzTableModule,
         NzPopconfirmModule,
-        NzEmptyModule
+        NzEmptyModule,
+        NzUploadModule,
+        NzModalModule,
+        NgStyle
     ],
     exports: [MainComponent, BooksTableComponent, NoDataComponent]
 })
