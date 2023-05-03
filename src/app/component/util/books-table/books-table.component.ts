@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BookPreview} from "../../../dto/book/book-preview.dto";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-books-table',
@@ -9,7 +10,11 @@ import {BookPreview} from "../../../dto/book/book-preview.dto";
 export class BooksTableComponent {
     @Input() title: string = "";
     @Input() books: BookPreview[] = [];
+
+    constructor(private router: Router) {
+    }
+
     goToBookDescription = (id: number) => {
-        console.log("test ", id);
+        this.router.navigate([`book/${id}`])
     };
 }

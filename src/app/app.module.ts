@@ -24,12 +24,12 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NotFoundComponent} from './component/util/exception-handler/not-found/not-found.component';
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
-import {NoDataComponent} from './component/util/exception-handler/no-data/no-data.component';
 import {FormReaderTicketComponent} from "./component/main/user/form-reader-ticket/form-reader-ticket.component";
 import {MyBooksComponent} from "./component/main/user/reader/my-books/my-books.component";
 import {AddBookComponent} from "./component/main/admin/add-book/add-book.component";
 import {UserGuard} from "./component/main/user/user.guard";
 import {AllBooksComponent} from "./component/main/admin/all-books/all-books.component";
+import {BookComponent} from "./component/main/home/book/book.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -39,6 +39,7 @@ const appRoute: Routes = [
         children: [
             {path: "", component: HomeComponent},
             {path: "authors", component: AuthorsComponent},
+            {path: "book/:id", component: BookComponent},
             {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
             {path: "my-books", component: MyBooksComponent, canActivate: [UserGuard]},
 

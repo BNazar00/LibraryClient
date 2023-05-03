@@ -32,6 +32,7 @@ import {NoDataComponent} from "../util/exception-handler/no-data/no-data.compone
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzModalModule} from "ng-zorro-antd/modal";
+import {BookComponent} from './home/book/book.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import {NzModalModule} from "ng-zorro-antd/modal";
         MyBooksComponent,
         AddBookComponent,
         AllBooksComponent,
-        NoDataComponent
+        NoDataComponent,
+        BookComponent
     ],
     imports: [
         NgClass,

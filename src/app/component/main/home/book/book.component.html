@@ -1,0 +1,38 @@
+<div *ngIf="book">
+    <div class="book-details">
+        <div class="book-details-image">
+            <img src="{{book.photoUrl}}" alt="{{book.title}}"/>
+        </div>
+        <div class="book-details-info">
+            <div>
+                <div class="book-details-title">{{book.title}}</div>
+                <div class="book-details-author">
+                    <span>Author:</span>
+                    <a [routerLink]="['/authors', book.author.id]">{{book.author.firstName}} {{book.author.lastName}}</a>
+                </div>
+                <div class="book-details-publisher">
+                    <span>Publisher:</span>
+                    <a [routerLink]="['/publishers', book.publisher.id]">{{book.publisher.name}}</a>
+                </div>
+                <div class="book-details-publication-year">
+                    <span>Publication Year:</span>{{book.publicationYear}}
+                </div>
+                <div class="book-details-page-count">
+                    <span>Page Count:</span>{{book.pageCount}}
+                </div>
+                <div class="book-details-price">
+                    <span>Price:</span>
+                    <span nz-typography nzType="danger">${{book.price}}<span
+                        nz-typography nzType="secondary"
+                        class="book-details-price-info">/per day</span>
+                </span>
+                </div>
+            </div>
+            <button nz-button nzType="primary"
+            (click)="checkOut()">Check it out</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!book">
+    <app-no-data/>
+</div>
