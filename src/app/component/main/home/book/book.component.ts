@@ -37,7 +37,8 @@ export class BookComponent {
             publicationYear: 2023,
             pageCount: 199,
             photoUrl: "https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-cust-13095.jpg?itok=H0c1QL8Y",
-            price: 0.99
+            price: 0.99,
+            availableCount: 2
         }
     };
 }

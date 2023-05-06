@@ -49,3 +49,10 @@ body {
 .hide {
     display: none;
 }
+
+.book-details-price {
+    &-info {
+        font-size: 8px;
+        font-weight: normal;
+    }
+}

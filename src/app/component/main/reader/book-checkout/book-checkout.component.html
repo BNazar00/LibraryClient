@@ -1,0 +1,92 @@
+<div *ngIf="book">
+    <div class="book-checkout-wrapper">
+        <div class="info">
+            <div class="block">
+                <h3 nz-typography>Payment method</h3>
+                <nz-radio-group [(ngModel)]="paymentMethod"
+                                (ngModelChange)="onChange()">
+                    <div class="radio-button-block">
+                        <label nz-radio nzValue="LibraryPay" class="radio-button">
+                            <div class="radio-button-image-wrapper">
+                                <img class="radio-button-image" src="assets/images/pay-logo.png"
+                                     alt="Radio button image">
+                            </div>
+                            <div class="radio-button-label"></div>
+                        </label>
+                    </div>
+                </nz-radio-group>
+
+                <h3 nz-typography>Address</h3>
+                <nz-select class="details details-select" [ngModel]="address.id" nzDisabled>
+                    <nz-option [nzValue]="address.id" [nzLabel]="address.name"></nz-option>
+                </nz-select>
+
+                <h3 nz-typography>Return date</h3>
+                <div class="details">
+                    <nz-date-picker
+                        [(ngModel)]="timePeriod.endDate"
+                        [nzDisabledDate]="isDisabledDate"
+                        (ngModelChange)="onChange()">
+                    </nz-date-picker>
+                </div>
+            </div>
+            <div class="block">
+                <div class="book-info">
+                    <img [src]="book.photoUrl" class="book-image" alt="book"/>
+                    <div class="book-info-details">
+                        <h4 nz-typography>{{book.title}}</h4>
+                        <p *ngIf="(book.author.firstName + book.author.lastName).trim() === ''">Unknown author</p>
+                        <p *ngIf="(book.author.firstName + book.author.lastName).trim() !== ''">
+                            Written by {{book.author.firstName}} {{book.author.lastName}}
+                        </p>
+                        <p nz-typography nzType="secondary">Publisher: {{book.publisher.name}}</p>
+                        <p nz-typography nzType="secondary">Publication year: {{book.publicationYear}}</p>
+                        <h5 nz-typography>${{book.price}}<span nz-typography nzType="secondary"
+                                                                               class="book-details-price-info">/per day</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary-wrapper">
+            <div class="summary block">
+                <div class="summary-info-container">
+                    <h3 nz-typography>Summary</h3>
+                    <div class="info">
+                        <span>Time period</span>
+                        <span *ngIf="!timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'yyyy.MM.dd')}} to ...</span>
+                        <span *ngIf="timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'yyyy.MM.dd')}} to
+                            {{datePipe.transform(timePeriod.endDate, 'yyyy.MM.dd')}}</span>
+                    </div>
+                    <div class="info">
+                        <span>Total book checkout price</span>
+                        <span>${{price}}</span>
+                    </div>
+                    <div class="info">
+                        <span>Total shipping</span>
+                        <span>Free</span>
+                    </div>
+                </div>
+                <div class="summary-info-container">
+                    <div class="info">
+                        <h5 nz-typography>Total</h5>
+                        <span>US ${{price}}</span>
+                    </div>
+                    <div nz-typography nzType="secondary" class="info">
+                        <p>Current balance</p>
+                        <p>US ${{accountBalance}}</p>
+                    </div>
+                    <button [nzLoading]="buttonLoading" nz-button nzType="primary" (click)="checkout()">Pay now</button>
+                    <div class="terms">
+                        Upon clicking 'Pay now', I confirm I have read and acknowledged
+                        <a>all terms and policies.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!book">
+    <app-no-data/>
+</div>
+

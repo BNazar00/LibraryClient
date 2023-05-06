@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
 import {AuthService} from "../../../service/auth/auth.service";
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
+import {Observable} from "rxjs";
 import {ROLE} from "../../../core/constant/role.enum";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserGuard {
+export class ReaderGuard {
     constructor(private authService: AuthService, private router: Router) {
     }
 
@@ -15,7 +15,7 @@ export class UserGuard {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-        if (this.authService.isUserHasRoles([ROLE.USER])) {
+        if (this.authService.isUserHasRoles([ROLE.READER])) {
             return true;
         }
 

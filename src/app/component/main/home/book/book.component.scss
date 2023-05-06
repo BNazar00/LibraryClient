@@ -29,19 +29,13 @@
         .book-details-publisher,
         .book-details-publication-year,
         .book-details-page-count,
+        .book-details-count,
         .book-details-price {
             margin-bottom: 8px;
 
             span {
                 font-weight: bold;
                 margin-right: 8px;
-            }
-        }
-
-        .book-details-price {
-            &-info {
-                font-size: 8px;
-                font-weight: normal;
             }
         }
     }

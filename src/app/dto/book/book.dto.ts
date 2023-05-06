@@ -10,4 +10,5 @@ export interface Book {
     pageCount: number;
     photoUrl: string;
     price: number;
+    availableCount: number;
 }

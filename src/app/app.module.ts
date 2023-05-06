@@ -30,6 +30,8 @@ import {AddBookComponent} from "./component/main/admin/add-book/add-book.compone
 import {UserGuard} from "./component/main/user/user.guard";
 import {AllBooksComponent} from "./component/main/admin/all-books/all-books.component";
 import {BookComponent} from "./component/main/home/book/book.component";
+import {ReaderGuard} from "./component/main/reader/reader.guard";
+import {BookCheckoutComponent} from "./component/main/reader/book-checkout/book-checkout.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -39,7 +41,9 @@ const appRoute: Routes = [
         children: [
             {path: "", component: HomeComponent},
             {path: "authors", component: AuthorsComponent},
+
             {path: "book/:id", component: BookComponent},
+            {path: "book/checkout/:id", component: BookCheckoutComponent, canActivate: [ReaderGuard]},
             {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
             {path: "my-books", component: MyBooksComponent, canActivate: [UserGuard]},
 

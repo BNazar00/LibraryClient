@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, NgTemplateOutlet} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, NgTemplateOutlet} from "@angular/common";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {HeaderComponent} from "./header/header.component";
@@ -33,6 +33,10 @@ import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {BookComponent} from './home/book/book.component';
+import {BookCheckoutComponent} from './reader/book-checkout/book-checkout.component';
+import {NzRadioModule} from "ng-zorro-antd/radio";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzSpinModule} from "ng-zorro-antd/spin";
 
 @NgModule({
     declarations: [
@@ -48,7 +52,8 @@ import {BookComponent} from './home/book/book.component';
         AddBookComponent,
         AllBooksComponent,
         NoDataComponent,
-        BookComponent
+        BookComponent,
+        BookCheckoutComponent
     ],
     imports: [
         NgClass,
@@ -79,8 +84,12 @@ import {BookComponent} from './home/book/book.component';
         NzEmptyModule,
         NzUploadModule,
         NzModalModule,
-        NgStyle
+        NgStyle,
+        NzRadioModule,
+        NzDatePickerModule,
+        NzSpinModule
     ],
+    providers: [DatePipe],
     exports: [MainComponent, BooksTableComponent, NoDataComponent]
 })
 export class MainModule {

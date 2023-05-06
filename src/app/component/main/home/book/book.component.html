@@ -15,10 +15,13 @@
                     <a [routerLink]="['/publishers', book.publisher.id]">{{book.publisher.name}}</a>
                 </div>
                 <div class="book-details-publication-year">
-                    <span>Publication Year:</span>{{book.publicationYear}}
+                    <span>Publication year:</span>{{book.publicationYear}}
                 </div>
                 <div class="book-details-page-count">
                     <span>Page Count:</span>{{book.pageCount}}
+                </div>
+                <div class="book-details-count">
+                    <span>Available count:</span>{{book.availableCount}}
                 </div>
                 <div class="book-details-price">
                     <span>Price:</span>

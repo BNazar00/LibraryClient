@@ -79,7 +79,8 @@ export class AllBooksComponent {
                 publicationYear: 2023 + i,
                 pageCount: 200 + i,
                 photoUrl: "https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-cust-13095.jpg?itok=H0c1QL8Y",
-                price: 0.99 + i / 2
+                price: 0.99 + i / 2,
+                availableCount: i + 1
             });
         }
         this.listOfData = data;
