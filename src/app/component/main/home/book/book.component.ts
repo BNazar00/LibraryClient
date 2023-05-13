@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Book} from "../../../../dto/book/book.dto";
+import {BookService} from "../../../../service/book.service";
+import {AuthService} from "../../../../service/auth/auth.service";
+import {ROLE} from "../../../../core/constant/role.enum";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
     selector: 'app-book',
@@ -9,9 +13,14 @@ import {Book} from "../../../../dto/book/book.dto";
 })
 export class BookComponent {
     protected book: Book | undefined;
+    protected showNoData: boolean = false;
+
 
     constructor(private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private bookService: BookService,
+                private authService: AuthService,
+                private message: NzMessageService) {
     }
 
     ngOnInit(): void {
@@ -21,24 +30,24 @@ export class BookComponent {
             return;
         }
 
-        this.book = this.getBook(+id)
+        this.bookService.getBookById(+id).subscribe({
+            next: value => {
+                if (!value) {
+                    this.showNoData = true;
+                    return;
+                }
+                this.book = value
+            },
+            error: () => this.showNoData = true
+        })
     }
 
     protected checkOut = () => {
-        this.router.navigate([`/book/checkout/${this.book!.id}`])
-    };
+        if (this.authService.isUserHasRoles([ROLE.READER])) {
+            this.router.navigate([`/book/checkout/${this.book!.id}`]);
 
-    private getBook = (id: number): Book => {
-        return {
-            id: id,
-            title: "Title",
-            author: {id: 1, lastName: "aLN", firstName: "aFN"},
-            publisher: {id: 1, name: "pN"},
-            publicationYear: 2023,
-            pageCount: 199,
-            photoUrl: "https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-cust-13095.jpg?itok=H0c1QL8Y",
-            price: 0.99,
-            availableCount: 2
+        } else {
+            this.message.warning("A reader ticket is needed")
         }
     };
 }

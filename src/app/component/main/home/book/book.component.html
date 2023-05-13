@@ -8,11 +8,11 @@
                 <div class="book-details-title">{{book.title}}</div>
                 <div class="book-details-author">
                     <span>Author:</span>
-                    <a [routerLink]="['/authors', book.author.id]">{{book.author.firstName}} {{book.author.lastName}}</a>
+                    <a [routerLink]="['/author', book.author.id]">{{book.author.firstName}} {{book.author.lastName}}</a>
                 </div>
                 <div class="book-details-publisher">
                     <span>Publisher:</span>
-                    <a [routerLink]="['/publishers', book.publisher.id]">{{book.publisher.name}}</a>
+                    <a [routerLink]="['/publisher', book.publisher.id]">{{book.publisher.name}}</a>
                 </div>
                 <div class="book-details-publication-year">
                     <span>Publication year:</span>{{book.publicationYear}}
@@ -32,10 +32,11 @@
                 </div>
             </div>
             <button nz-button nzType="primary"
-            (click)="checkOut()">Check it out</button>
+                    [disabled]="book.availableCount===0"
+            (click)="checkOut()">Checkout the book</button>
         </div>
     </div>
 </div>
-<div *ngIf="!book">
+<div *ngIf="showNoData">
     <app-no-data/>
 </div>
