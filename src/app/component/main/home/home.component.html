@@ -1,12 +1,12 @@
 <ng-container *ngIf="bestsellers.length !== 0">
     <app-books-table [title]="'Bestsellers'" [books]="bestsellers"/>
 </ng-container>
-<ng-container *ngIf="arrivals.length !== 0">
-    <app-books-table [title]="'Latest Arrivals'" [books]="arrivals"/>
+<ng-container *ngIf="latestArrivals.length !== 0">
+    <app-books-table [title]="'Latest Arrivals'" [books]="latestArrivals"/>
     <button (click)="onAllBooksButtonClick()" class="button_all-books" nz-button nzType="default">
         All books
     </button>
 </ng-container>
-<ng-container *ngIf="arrivals.length === 0">
+<ng-container *ngIf="latestArrivals.length === 0">
     <div class="no-data-wrapper"><app-no-data/></div>
 </ng-container>
