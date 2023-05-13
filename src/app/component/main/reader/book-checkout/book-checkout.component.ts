@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BookCheckoutRequest} from "../../../../dto/book/checkout/book-checkout-request.dto";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {BookService} from "../../../../service/book.service";
 
 @Component({
     selector: 'app-book-checkout',
@@ -14,25 +15,27 @@ import {NzModalService} from "ng-zorro-antd/modal";
 })
 export class BookCheckoutComponent {
     protected address: Address = {id: 1, name: "Hollywood"}
-    protected book: Book | null = null;
-    protected paymentMethod = null;
+    protected book: Book | undefined;
+    protected showNoData: boolean = false;
+    protected paymentMethod = undefined;
 
     protected orderState = false;
     protected timePeriod = {
         startDate: new Date(),
-        endDate: null
+        endDate: undefined
     }
     protected price = "0";
     protected accountBalance = "100";
     protected buttonLoading = false;
     private checkoutRequest: BookCheckoutRequest = {
         bookId: 0,
-        timePeriod: this.timePeriod
+        returnDate: undefined
     }
 
     constructor(protected datePipe: DatePipe,
                 private route: ActivatedRoute,
                 private router: Router,
+                private bookService: BookService,
                 private message: NzMessageService,
                 private modal: NzModalService) {
     }
@@ -43,10 +46,12 @@ export class BookCheckoutComponent {
     }
 
     protected onChange(): void {
-        this.orderState = this.timePeriod.endDate !== null && this.paymentMethod !== null;
+        this.orderState = !!this.timePeriod.endDate && this.paymentMethod;
         if (!this.timePeriod.endDate) {
             return
         }
+        this.checkoutRequest.returnDate = this.timePeriod.endDate;
+
         const endDate = this.timePeriod.endDate as Date;
         const diffInMs = endDate.getTime() - this.timePeriod.startDate.getTime();
         const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
@@ -59,18 +64,22 @@ export class BookCheckoutComponent {
             return;
         }
 
-        this.buttonLoading = true
-        setTimeout(() => {
-            this.buttonLoading = false;
-            this.modal.success({
-                nzOnOk: () => this.router.navigate(["/"]),
-                nzCloseIcon: "",
-                nzTitle: 'Operation success!',
-                nzContent: 'Your book storage operation id: 000'
-            });
-
-        }, 2000);
-
+        this.buttonLoading = true;
+        this.bookService.checkoutBook(this.checkoutRequest).subscribe({
+            next: (value) => {
+                this.buttonLoading = false;
+                this.modal.success({
+                    nzOnOk: () => this.router.navigate(["/my-books"]),
+                    nzCloseIcon: "",
+                    nzTitle: 'Operation success!',
+                    nzContent: `Your book storage operation id: ${value}`
+                });
+            },
+            error: (err) => {
+                this.buttonLoading = false;
+                this.message.error(err.error.message)
+            }
+        })
     };
 
     private ngOnInit(): void {
@@ -80,8 +89,18 @@ export class BookCheckoutComponent {
             return;
         }
 
-        this.book = this.getBook(+id)
-        this.checkoutRequest.bookId = this.book.id;
+        this.bookService.getBookById(+id).subscribe({
+            next: value => {
+                if (!value) {
+                    this.showNoData = true;
+                    return;
+                }
+                this.book = value;
+                this.checkoutRequest.bookId = value.id;
+            },
+            error: () => this.showNoData = true
+        })
+
     }
 
     private getBook = (id: number): Book => {

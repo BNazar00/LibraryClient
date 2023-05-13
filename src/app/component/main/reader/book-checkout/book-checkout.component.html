@@ -25,6 +25,7 @@
                 <div class="details">
                     <nz-date-picker
                         [(ngModel)]="timePeriod.endDate"
+                        [nzShowToday]="false"
                         [nzDisabledDate]="isDisabledDate"
                         (ngModelChange)="onChange()">
                     </nz-date-picker>
@@ -54,9 +55,9 @@
                     <h3 nz-typography>Summary</h3>
                     <div class="info">
                         <span>Time period</span>
-                        <span *ngIf="!timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'yyyy.MM.dd')}} to ...</span>
-                        <span *ngIf="timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'yyyy.MM.dd')}} to
-                            {{datePipe.transform(timePeriod.endDate, 'yyyy.MM.dd')}}</span>
+                        <span *ngIf="!timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'dd.MM.yyyy')}} to ...</span>
+                        <span *ngIf="timePeriod.endDate">from {{datePipe.transform(timePeriod.startDate, 'dd.MM.yyyy')}} to
+                            {{datePipe.transform(timePeriod.endDate, 'dd.MM.yyyy')}}</span>
                     </div>
                     <div class="info">
                         <span>Total book checkout price</span>
@@ -86,7 +87,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="!book">
+<div *ngIf="showNoData">
     <app-no-data/>
 </div>
 
