@@ -11,7 +11,7 @@ export class FileService {
     }
 
     deleteImage(imageName: string) {
-        return this.http.delete<boolean>(BASE_URL + "/delete-image", {params: {imageName}}).pipe(
+        return this.http.delete<boolean>(BASE_URL + "/api/v1/image", {params: {imageName}}).pipe(
             map(() => true),
             catchError(() => of(false))
         );

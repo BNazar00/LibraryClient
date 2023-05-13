@@ -20,7 +20,7 @@ export class AddBookComponent {
     protected validateForm: UntypedFormGroup;
 
     protected fileList: NzUploadFile[] = [];
-    protected readonly BASE_URL = BASE_URL;
+    protected readonly uploadUrl = BASE_URL + "/api/v1/image";
     protected previewImage: string | undefined = "";
     protected previewVisible = false;
     protected uploadConfig: NzShowUploadList = {

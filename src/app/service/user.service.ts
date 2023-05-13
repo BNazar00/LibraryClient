@@ -11,7 +11,7 @@ export class UserService {
     }
 
     existsUserByEmail = (email: string): Observable<boolean> => {
-        return this.http.get<boolean>(`${BASE_URL}/user`, {params: {email}, observe: 'response'}).pipe(
+        return this.http.get<boolean>(`${BASE_URL}/api/v1/user`, {params: {email}, observe: 'response'}).pipe(
             map((response) => {
                 return response.status === 200;
             })

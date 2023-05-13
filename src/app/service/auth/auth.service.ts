@@ -13,7 +13,7 @@ import {ROLE} from "../../core/constant/role.enum";
     providedIn: 'root'
 })
 export class AuthService {
-    private URL: string = BASE_URL + "/auth";
+    private URL: string = BASE_URL + "/api/v1/auth";
 
     constructor(private http: HttpClient, private router: Router, private message: NzMessageService) {
     }
