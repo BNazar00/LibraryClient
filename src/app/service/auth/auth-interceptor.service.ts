@@ -8,11 +8,18 @@ export class Interceptor implements HttpInterceptor {
         const token = localStorage.getItem('access_token');
 
         if (token) {
-            const request = req.clone({
-                headers: req.headers.set('Authorization', `Bearer ${token}`)
-            });
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            const expiresAt = new Date(tokenPayload.exp).valueOf() * 1000;
 
-            return next.handle(request);
+            if (new Date().getTime() < expiresAt) {
+                const request = req.clone({
+                    headers: req.headers.set('Authorization', `Bearer ${token}`)
+                });
+                return next.handle(request);
+            }
+
+            localStorage.removeItem('access_token');
+            return next.handle(req);
         }
 
         return next.handle(req);
