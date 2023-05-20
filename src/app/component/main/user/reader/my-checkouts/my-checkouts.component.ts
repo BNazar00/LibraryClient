@@ -4,10 +4,10 @@ import {UserService} from "../../../../../service/user.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
-    selector: 'app-my-books',
-    templateUrl: './my-books.component.html'
+    selector: 'app-my-checkouts',
+    templateUrl: './my-checkouts.component.html'
 })
-export class MyBooksComponent {
+export class MyCheckoutsComponent {
     protected books: BookPreview[] = [];
     protected showNoData = false;
 
@@ -21,7 +21,11 @@ export class MyBooksComponent {
                 if (value.length === 0) {
                     this.showNoData = true;
                 }
-                this.books = value;
+                this.books = value.map(e => ({
+                    id: e.id,
+                    title: e.bookCopy.book.title,
+                    photoUrl: e.bookCopy.book.photoUrl
+                }));
             },
             error: (err) => {
                 this.showNoData = true;

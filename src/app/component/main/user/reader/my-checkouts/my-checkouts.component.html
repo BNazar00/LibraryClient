@@ -1,5 +1,5 @@
 <div *ngIf="books.length !== 0">
-<app-books-table [title]="'My books'" [books]="books"/>
+    <app-books-table [title]="'My checkouts'" [books]="books" pathBeforeId="my-checkout"/>
 </div>
 <div *ngIf="showNoData">
     <app-no-data/>

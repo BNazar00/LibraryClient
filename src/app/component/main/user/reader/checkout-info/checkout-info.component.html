@@ -1,0 +1,39 @@
+<div *ngIf="checkout">
+    <div class="book-details">
+        <div class="book-details-image">
+            <img src="{{checkout.bookCopy.book.photoUrl}}" alt="{{checkout.bookCopy.book.title}}"/>
+        </div>
+        <div class="book-details-info">
+            <div>
+                <div class="book-detail-title">{{checkout.bookCopy.book.title}}</div>
+                <div class="book-detail">
+                    <span>Author:</span>
+                    <a [routerLink]="['/author', checkout.bookCopy.book.author.id]">{{checkout.bookCopy.book.author.firstName}} {{checkout.bookCopy.book.author.lastName}}</a>
+                </div>
+                <div class="book-detail">
+                    <span>Publisher:</span>
+                    <a [routerLink]="['/publisher', checkout.bookCopy.book.publisher.id]">{{checkout.bookCopy.book.publisher.name}}</a>
+                </div>
+                <div class="book-detail">
+                    <span>Publication year:</span>{{checkout.bookCopy.book.publicationYear}}
+                </div>
+                <div class="book-detail">
+                    <span>Page Count:</span>{{checkout.bookCopy.book.pageCount}}
+                </div>
+                <div class="book-detail">
+                    <span>Book copy identificator:</span>{{checkout.bookCopy.id}}
+                </div>
+                <div class="book-detail">
+                    <span>Time period:</span>from {{datePipe.transform(checkout.issueDate, 'dd.MM.yyyy')}} to
+                    {{datePipe.transform(checkout.returnDate, 'dd.MM.yyyy')}}
+                </div>
+                <div class="book-detail">
+                    <span>Checkout status:</span>{{checkout.status}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="showNoData">
+    <app-no-data/>
+</div>

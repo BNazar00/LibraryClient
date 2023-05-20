@@ -5,25 +5,25 @@
         </div>
         <div class="book-details-info">
             <div>
-                <div class="book-details-title">{{book.title}}</div>
-                <div class="book-details-author">
+                <div class="book-detail-title">{{book.title}}</div>
+                <div class="book-detail">
                     <span>Author:</span>
                     <a [routerLink]="['/author', book.author.id]">{{book.author.firstName}} {{book.author.lastName}}</a>
                 </div>
-                <div class="book-details-publisher">
+                <div class="book-detail">
                     <span>Publisher:</span>
                     <a [routerLink]="['/publisher', book.publisher.id]">{{book.publisher.name}}</a>
                 </div>
-                <div class="book-details-publication-year">
+                <div class="book-detail">
                     <span>Publication year:</span>{{book.publicationYear}}
                 </div>
-                <div class="book-details-page-count">
+                <div class="book-detail">
                     <span>Page Count:</span>{{book.pageCount}}
                 </div>
-                <div class="book-details-count">
+                <div class="book-detail">
                     <span>Available count:</span>{{book.availableCount}}
                 </div>
-                <div class="book-details-price">
+                <div class="book-detail book-detail-price">
                     <span>Price:</span>
                     <span nz-typography nzType="danger">${{book.price}}<span
                         nz-typography nzType="secondary"

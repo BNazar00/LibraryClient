@@ -25,13 +25,14 @@ import {NotFoundComponent} from './component/util/exception-handler/not-found/no
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {FormReaderTicketComponent} from "./component/main/user/form-reader-ticket/form-reader-ticket.component";
-import {MyBooksComponent} from "./component/main/user/reader/my-books/my-books.component";
+import {MyCheckoutsComponent} from "./component/main/user/reader/my-checkouts/my-checkouts.component";
 import {AddBookComponent} from "./component/main/admin/add-book/add-book.component";
 import {UserGuard} from "./component/main/user/user.guard";
 import {AllBooksComponent} from "./component/main/admin/all-books/all-books.component";
 import {BookComponent} from "./component/main/home/book/book.component";
-import {ReaderGuard} from "./component/main/reader/reader.guard";
-import {BookCheckoutComponent} from "./component/main/reader/book-checkout/book-checkout.component";
+import {CheckoutComponent} from "./component/main/user/reader/checkout/checkout.component";
+import {CheckoutInfoComponent} from "./component/main/user/reader/checkout-info/checkout-info.component";
+import {ReaderGuard} from "./component/main/user/reader/reader.guard";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -43,9 +44,10 @@ const appRoute: Routes = [
             {path: "authors", component: AuthorsComponent},
 
             {path: "book/:id", component: BookComponent},
-            {path: "book/checkout/:id", component: BookCheckoutComponent, canActivate: [ReaderGuard]},
+            {path: "book/checkout/:id", component: CheckoutComponent, canActivate: [ReaderGuard]},
             {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
-            {path: "my-books", component: MyBooksComponent, canActivate: [UserGuard]},
+            {path: "my-checkouts", component: MyCheckoutsComponent, canActivate: [ReaderGuard]},
+            {path: "my-checkout/:id", component: CheckoutInfoComponent, canActivate: [ReaderGuard]},
 
             {path: "admin/add-book", component: AddBookComponent, canActivate: [AdminGuard]},
             {path: "admin/all-books", component: AllBooksComponent, canActivate: [AdminGuard]},

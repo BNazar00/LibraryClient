@@ -19,7 +19,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
-import {MyBooksComponent} from './user/reader/my-books/my-books.component';
+import {MyCheckoutsComponent} from './user/reader/my-checkouts/my-checkouts.component';
 import {BooksTableComponent} from "../util/books-table/books-table.component";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {AddBookComponent} from './admin/add-book/add-book.component';
@@ -33,10 +33,11 @@ import {NzEmptyModule} from "ng-zorro-antd/empty";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {BookComponent} from './home/book/book.component';
-import {BookCheckoutComponent} from './reader/book-checkout/book-checkout.component';
+import {CheckoutComponent} from './user/reader/checkout/checkout.component';
 import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSpinModule} from "ng-zorro-antd/spin";
+import { CheckoutInfoComponent } from './user/reader/checkout-info/checkout-info.component';
 
 @NgModule({
     declarations: [
@@ -48,12 +49,13 @@ import {NzSpinModule} from "ng-zorro-antd/spin";
         BooksComponent,
         FormReaderTicketComponent,
         BooksTableComponent,
-        MyBooksComponent,
+        MyCheckoutsComponent,
         AddBookComponent,
         AllBooksComponent,
         NoDataComponent,
         BookComponent,
-        BookCheckoutComponent
+        CheckoutComponent,
+        CheckoutInfoComponent
     ],
     imports: [
         NgClass,

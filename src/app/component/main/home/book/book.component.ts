@@ -8,8 +8,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
     selector: 'app-book',
-    templateUrl: './book.component.html',
-    styleUrls: ['./book.component.scss']
+    templateUrl: './book.component.html'
 })
 export class BookComponent {
     protected book: Book | undefined;

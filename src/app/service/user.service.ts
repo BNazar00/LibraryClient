@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "../core/constant/constants";
 import {map, Observable} from "rxjs";
 import {BookPreview} from "../dto/book/book-preview.dto";
+import {CheckoutPreview} from "../dto/book/checkout-preview.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,6 @@ export class UserService {
     }
 
     getLoggedInUserBooks= ()=>{
-        return this.http.get<BookPreview[]>(`${BASE_URL}/api/v1/user/books`)
+        return this.http.get<CheckoutPreview[]>(`${BASE_URL}/api/v1/user/checkout/current`)
     }
 }

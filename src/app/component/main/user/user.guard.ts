@@ -15,7 +15,7 @@ export class UserGuard {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-        if (this.authService.isUserHasRoles([ROLE.USER])) {
+        if (this.authService.isUserHasRoles([ROLE.USER]) && !this.authService.isUserHasRoles([ROLE.READER])) {
             return true;
         }
 

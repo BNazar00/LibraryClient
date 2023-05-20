@@ -9,12 +9,13 @@ import {Router} from "@angular/router";
 })
 export class BooksTableComponent {
     @Input() title: string = "";
+    @Input() pathBeforeId: string = `/book`;
     @Input() books: BookPreview[] = [];
 
     constructor(private router: Router) {
     }
 
     goToBookDescription = (id: number) => {
-        this.router.navigate([`book/${id}`])
+        this.router.navigate([`${this.pathBeforeId}/${id}`])
     };
 }

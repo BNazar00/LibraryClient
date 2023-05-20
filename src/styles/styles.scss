@@ -50,9 +50,48 @@ body {
     display: none;
 }
 
-.book-details-price {
+.book-details {
+    display: flex;
+    flex-direction: row;
+
+    &-image {
+        margin-right: 24px;
+
+        img {
+            max-width: 220px;
+            height: auto;
+            display: block;
+        }
+    }
+
     &-info {
-        font-size: 8px;
-        font-weight: normal;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex: 1;
+
+
+        .book-detail {
+            margin-bottom: 8px;
+
+            &-title {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 16px;
+            }
+
+            &-price {
+                &-info {
+                    font-size: 8px;
+                    font-weight: normal;
+                }
+            }
+
+            span {
+                font-weight: bold;
+                margin-right: 8px;
+            }
+        }
     }
 }

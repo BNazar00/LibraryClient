@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
-import {Address} from "../../../../dto/address.dto";
-import {Book} from "../../../../dto/book/book.dto";
+import {Address} from "../../../../../dto/address.dto";
+import {Book} from "../../../../../dto/book/book.dto";
 import {DatePipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BookCheckoutRequest} from "../../../../dto/book/checkout/book-checkout-request.dto";
+import {CheckoutRequest} from "../../../../../dto/book/checkout-request.dto";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {BookService} from "../../../../service/book.service";
+import {BookService} from "../../../../../service/book.service";
 
 @Component({
-    selector: 'app-book-checkout',
-    templateUrl: './book-checkout.component.html',
-    styleUrls: ['./book-checkout.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss']
 })
-export class BookCheckoutComponent {
+export class CheckoutComponent {
     protected address: Address = {id: 1, name: "Hollywood"}
     protected book: Book | undefined;
     protected showNoData: boolean = false;
@@ -27,7 +27,7 @@ export class BookCheckoutComponent {
     protected price = "0";
     protected accountBalance = "100";
     protected buttonLoading = false;
-    private checkoutRequest: BookCheckoutRequest = {
+    private checkoutRequest: CheckoutRequest = {
         bookId: 0,
         returnDate: undefined
     }
@@ -69,7 +69,7 @@ export class BookCheckoutComponent {
             next: (value) => {
                 this.buttonLoading = false;
                 this.modal.success({
-                    nzOnOk: () => this.router.navigate(["/my-books"]),
+                    nzOnOk: () => this.router.navigate(["/my-checkouts"]),
                     nzCloseIcon: "",
                     nzTitle: 'Operation success!',
                     nzContent: `Your book storage operation id: ${value}`

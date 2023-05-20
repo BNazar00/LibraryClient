@@ -16,9 +16,9 @@
             Get reader ticket
         </li>
         <li *ngIf="authService.isUserHasRoles([ROLE.READER])"
-            nz-menu-item [nzSelected]="router.url === '/my-books'"
-            (click)="navigateTo('/my-books')">
-            My books
+            nz-menu-item [nzSelected]="router.url === '/checkouts'"
+            (click)="navigateTo('/my-checkouts')">
+            My checkouts
         </li>
         <li *ngIf="authService.isUserHasRoles([ROLE.ADMIN])"
             nz-submenu nzTitle="Books">
