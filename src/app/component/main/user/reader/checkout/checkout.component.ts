@@ -3,7 +3,7 @@ import {Address} from "../../../../../dto/address.dto";
 import {Book} from "../../../../../dto/book/book.dto";
 import {DatePipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CheckoutRequest} from "../../../../../dto/book/checkout-request.dto";
+import {CheckoutCreateRequest} from "../../../../../dto/book/checkout-create-request.dto";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {BookService} from "../../../../../service/book.service";
@@ -27,7 +27,7 @@ export class CheckoutComponent {
     protected price = "0";
     protected accountBalance = "100";
     protected buttonLoading = false;
-    private checkoutRequest: CheckoutRequest = {
+    private checkoutRequest: CheckoutCreateRequest = {
         bookId: 0,
         returnDate: undefined
     }
@@ -41,8 +41,9 @@ export class CheckoutComponent {
     }
 
     protected isDisabledDate = (current: Date): boolean => {
-        const today = new Date();
-        return current < today;
+        const weekFromNow = new Date();
+        weekFromNow.setDate(new Date().getDate() + 6);
+        return current < weekFromNow;
     }
 
     protected onChange(): void {
@@ -53,6 +54,7 @@ export class CheckoutComponent {
         this.checkoutRequest.returnDate = this.timePeriod.endDate;
 
         const endDate = this.timePeriod.endDate as Date;
+        console.log(endDate)
         const diffInMs = endDate.getTime() - this.timePeriod.startDate.getTime();
         const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
         this.price = (diffInDays * this.book!.price).toFixed(2);
@@ -101,19 +103,5 @@ export class CheckoutComponent {
             error: () => this.showNoData = true
         })
 
-    }
-
-    private getBook = (id: number): Book => {
-        return {
-            id: id,
-            title: "Title",
-            author: {id: 1, lastName: "aLN", firstName: "aFN"},
-            publisher: {id: 1, name: "pN"},
-            publicationYear: 2023,
-            pageCount: 199,
-            photoUrl: "https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-cust-13095.jpg?itok=H0c1QL8Y",
-            price: 0.99,
-            availableCount: 2
-        }
     }
 }

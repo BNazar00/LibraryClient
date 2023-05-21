@@ -1,0 +1,170 @@
+<nz-table #table
+          nzTableLayout="fixed"
+          [nzNoResult]="noDataTpl"
+          [nzData]="listOfDisplayData"
+          [nzPageSize]="9">
+    <thead>
+    <tr>
+        <th nzCustomFilter [nzWidth]="listOfColumn[0].width" scope="col"
+            [nzSortFn]="listOfColumn[0].compare"
+            [nzSortPriority]="listOfColumn[0].priority">
+            {{ listOfColumn[0].title }}
+            <nz-filter-trigger [(nzVisible)]="idSearchVisible" [nzActive]="idSearchValue.length > 0"
+                               [nzDropdownMenu]="idMenu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th nzCustomFilter [nzWidth]="listOfColumn[1].width" scope="col"
+            [nzSortFn]="listOfColumn[1].compare"
+            [nzSortPriority]="listOfColumn[1].priority">
+            {{ listOfColumn[1].title }}
+            <nz-filter-trigger [(nzVisible)]="idSearchVisible" [nzActive]="idSearchValue.length > 0"
+                               [nzDropdownMenu]="idMenu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th nzCustomFilter [nzWidth]="listOfColumn[2].width" scope="col"
+            [nzSortFn]="listOfColumn[2].compare"
+            [nzSortPriority]="listOfColumn[2].priority"
+            title="Book copy id">
+            {{ listOfColumn[2].title }}
+            <nz-filter-trigger [(nzVisible)]="bookCopyIdSearchVisible" [nzActive]="bookCopyIdSearchValue.length > 0"
+                               [nzDropdownMenu]="bookCopyIdMenu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th nzCustomFilter [nzWidth]="listOfColumn[3].width" scope="col"
+            [nzSortFn]="listOfColumn[3].compare"
+            [nzSortPriority]="listOfColumn[3].priority"
+        >
+            Title
+            <nz-filter-trigger [(nzVisible)]="titleSearchVisible" [nzActive]="titleSearchValue.length > 0"
+                               [nzDropdownMenu]="titleMenu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th *ngFor="let column of listOfColumn.slice(4, listOfColumn.length-1)" scope="col"
+            [nzWidth]="column.width"
+            [nzSortFn]="column.compare"
+            [nzSortPriority]="column.priority">
+            {{ column.title }}
+        </th>
+        <th nzCustomFilter [nzWidth]="listOfColumn[5].width" scope="col"
+            [nzSortFn]="listOfColumn[5].compare"
+            [nzSortPriority]="listOfColumn[5].priority"
+        >
+            {{listOfColumn[5].title}}
+            <nz-filter-trigger [(nzVisible)]="statusSearchVisible" [nzActive]="statusSearchValue.length > 0"
+                               [nzDropdownMenu]="statusMenu">
+                <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+        </th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let checkout of table.data">
+        <ng-container *ngIf="!editCache[checkout.id].edit; else editTemplate">
+            <td>{{ checkout.id }}</td>
+            <td><a target="_blank" [href]="">{{ checkout.userId }}</a></td>
+            <td>{{ checkout.bookCopy.id }}</td>
+            <td><a target="_blank" [href]="'/book/' + checkout.bookCopy.book.id">{{ checkout.bookCopy.book.title }}</a>
+            </td>
+            <td>{{datePipe.transform(checkout.issueDate, dateFormat)}}</td>
+            <td>{{datePipe.transform(checkout.returnDate, dateFormat)}}</td>
+            <td>{{ checkout.status }}</td>
+            <td><a (click)="startEdit(checkout.id)">Edit</a></td>
+        </ng-container>
+        <ng-template #editTemplate>
+            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.id"/></td>
+            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.userId"/></td>
+            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.bookCopy.id"/></td>
+            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.bookCopy.book.title"/>
+            </td>
+            <td>
+                <nz-date-picker
+                    [(ngModel)]="editCache[checkout.id].data.issueDate"
+                    [disabled]="isDisabledEditing(editCache[checkout.id].data.status)"
+                    [nzShowToday]="false"
+                    [nzDisabledDate]="isDisabledDateInIssueCalendar"
+                    [nzFormat]="dateFormat">
+                </nz-date-picker>
+            </td>
+            <td>
+                <nz-date-picker
+                    [(ngModel)]="editCache[checkout.id].data.returnDate"
+                    [disabled]="isDisabledEditing(editCache[checkout.id].data.status)"
+                    [nzShowToday]="false"
+                    [nzDisabledDate]="isDisabledDateInReturnCalendar"
+                    [nzFormat]="dateFormat">
+                </nz-date-picker>
+            </td>
+            <td>
+                <nz-select
+                    [(ngModel)]="editCache[checkout.id].data.status"
+                    [disabled]="isDisabledEditing(editCache[checkout.id].data.status)"
+                    nzShowSearch>
+                    <nz-option *ngFor="let option of getCheckoutStatusOptions(editCache[checkout.id].data.status)"
+                               [nzLabel]="option"
+                               [nzValue]="option"></nz-option>
+                </nz-select>
+            </td>
+            <td>
+                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to save?"
+                   (nzOnConfirm)="saveEdit(checkout.id)" class="save">Save </a>
+                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to cancel?"
+                   (nzOnConfirm)="cancelEdit(checkout.id)">Cancel</a>
+            </td>
+        </ng-template>
+    </tr>
+    </tbody>
+</nz-table>
+<ng-template #noDataTpl>
+    <div class="not-data-wrapper">
+        <app-no-data/>
+    </div>
+</ng-template>
+<nz-dropdown-menu #titleMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="titleSearchValue"/>
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSearch()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+<nz-dropdown-menu #statusMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <nz-select
+                nzMode="multiple"
+                nzPlaceHolder="Search status"
+                [(ngModel)]="statusSearchValue"
+                nzShowSearch>
+                <nz-option *ngFor="let option of checkoutStatusOptions"
+                           [nzLabel]="option"
+                           [nzValue]="option"></nz-option>
+            </nz-select>
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSearch()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+<nz-dropdown-menu #idMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search id" [(ngModel)]="idSearchValue"/>
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSearch()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+<nz-dropdown-menu #bookCopyIdMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search id" [(ngModel)]="bookCopyIdSearchValue"/>
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSearch()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

@@ -16,7 +16,7 @@ export class MyCheckoutsComponent {
     }
 
     private ngOnInit() {
-        this.userService.getLoggedInUserBooks().subscribe({
+        this.userService.getLoggedInUserCurrentCheckoutBookPreviews().subscribe({
             next: value => {
                 if (value.length === 0) {
                     this.showNoData = true;

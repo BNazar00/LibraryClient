@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "../core/constant/constants";
 import {map, Observable} from "rxjs";
-import {BookPreview} from "../dto/book/book-preview.dto";
 import {CheckoutPreview} from "../dto/book/checkout-preview.dto";
 
 @Injectable({
@@ -20,7 +19,7 @@ export class UserService {
         );
     }
 
-    getLoggedInUserBooks= ()=>{
+    getLoggedInUserCurrentCheckoutBookPreviews = () => {
         return this.http.get<CheckoutPreview[]>(`${BASE_URL}/api/v1/user/checkout/current`)
     }
 }

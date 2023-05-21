@@ -38,6 +38,7 @@ import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import { CheckoutInfoComponent } from './user/reader/checkout-info/checkout-info.component';
+import { AllCheckoutsComponent } from './admin/all-checkouts/all-checkouts.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { CheckoutInfoComponent } from './user/reader/checkout-info/checkout-info
         NoDataComponent,
         BookComponent,
         CheckoutComponent,
-        CheckoutInfoComponent
+        CheckoutInfoComponent,
+        AllCheckoutsComponent
     ],
     imports: [
         NgClass,

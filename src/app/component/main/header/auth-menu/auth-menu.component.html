@@ -33,6 +33,15 @@
                 </li>
             </ul>
         </li>
+        <li *ngIf="authService.isUserHasRoles([ROLE.ADMIN])"
+            nz-submenu nzTitle="Checkouts">
+            <ul>
+                <li nz-menu-item [nzSelected]="router.url === '/admin/all-checkouts'"
+                    (click)="navigateTo('/admin/all-checkouts')">
+                    All checkouts
+                </li>
+            </ul>
+        </li>
         <li *ngIf="authService.isLoggedIn()"
             nz-menu-item nzDanger (click)="authService.logout()">
             Logout

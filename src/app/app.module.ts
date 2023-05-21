@@ -33,6 +33,7 @@ import {BookComponent} from "./component/main/home/book/book.component";
 import {CheckoutComponent} from "./component/main/user/reader/checkout/checkout.component";
 import {CheckoutInfoComponent} from "./component/main/user/reader/checkout-info/checkout-info.component";
 import {ReaderGuard} from "./component/main/user/reader/reader.guard";
+import {AllCheckoutsComponent} from "./component/main/admin/all-checkouts/all-checkouts.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -51,6 +52,7 @@ const appRoute: Routes = [
 
             {path: "admin/add-book", component: AddBookComponent, canActivate: [AdminGuard]},
             {path: "admin/all-books", component: AllBooksComponent, canActivate: [AdminGuard]},
+            {path: "admin/all-checkouts", component: AllCheckoutsComponent, canActivate: [AdminGuard]},
 
             {path: "not-found", component: NotFoundComponent},
         ]
