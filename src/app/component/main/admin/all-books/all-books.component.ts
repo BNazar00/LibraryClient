@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {Book} from "../../../../dto/book/book.dto";
+import {BookService} from "../../../../service/book.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {CheckoutStatus} from "../../../../core/constant/checkout-status.enum";
 
 @Component({
     selector: 'app-all-books',
@@ -39,6 +42,10 @@ export class AllBooksComponent {
     protected listOfData: Book[] = [];
     protected listOfDisplayData: Book[] = [];
 
+    constructor(private message: NzMessageService,
+                private bookService: BookService) {
+    }
+
     protected resetSearch(): void {
         this.searchValue = '';
         this.search();
@@ -69,23 +76,18 @@ export class AllBooksComponent {
     }
 
     private ngOnInit(): void {
-        const data: Book[] = [];
-        for (let i = 0; i < 100; i++) {
-            data.push({
-                id: i,
-                title: `Test ${i}`,
-                author: {id: i, firstName: `AFName ${i}`, lastName: `ALName ${i}`},
-                publisher: {id: i, name: `PName ${i}`},
-                publicationYear: 2023 + i,
-                pageCount: 200 + i,
-                photoUrl: "https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-cust-13095.jpg?itok=H0c1QL8Y",
-                price: 0.99 + i / 2,
-                availableCount: i + 1
-            });
-        }
-        this.listOfData = data;
-        this.listOfDisplayData = [...data]
-        this.updateEditCache();
+        this.bookService.getAllBooks().subscribe({
+            next: value => {
+                let data = value
+                this.listOfData = data;
+                this.listOfDisplayData = [...data]
+                this.updateEditCache();
+            },
+            error: err => {
+                console.log(err)
+                this.message.error(err.message)
+            }
+        })
     }
 
     private updateEditCache(): void {

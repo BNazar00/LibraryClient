@@ -30,7 +30,7 @@
             <td>{{ book.publicationYear }}</td>
             <td>{{ book.pageCount }}</td>
             <td>{{ book.price }}</td>
-            <td><a (click)="startEdit(book.id)">Edit</a></td>
+            <td><a (click)="startEdit(book.id)">Edit</a><a>Delete</a></td>
         </ng-container>
         <ng-template #editTemplate>
             <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.title"/></td>

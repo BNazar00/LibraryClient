@@ -13,8 +13,12 @@ export class BookService {
     constructor(private http: HttpClient) {
     }
 
+    getAllBooks = () => {
+        return this.http.get<Book[]>(`${BASE_URL}/api/v1/book/admin/all`);
+    }
+
     getBookById = (id: number) => {
-        return this.http.get<Book>(`${BASE_URL}/api/v1/book/${id}`)
+        return this.http.get<Book>(`${BASE_URL}/api/v1/book/${id}`);
     }
 
     getTop10Bestsellers = () => {
