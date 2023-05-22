@@ -2,7 +2,7 @@ import {Book} from "./book.dto";
 
 export interface Checkout {
     id: number;
-    userId: number;
+    userEmail: string;
     issueDate: Date;
     returnDate: Date
     bookCopy: {

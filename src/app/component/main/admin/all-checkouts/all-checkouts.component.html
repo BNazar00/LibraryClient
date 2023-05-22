@@ -49,11 +49,11 @@
             [nzSortPriority]="column.priority">
             {{ column.title }}
         </th>
-        <th nzCustomFilter [nzWidth]="listOfColumn[5].width" scope="col"
-            [nzSortFn]="listOfColumn[5].compare"
-            [nzSortPriority]="listOfColumn[5].priority"
+        <th nzCustomFilter [nzWidth]="listOfColumn[6].width" scope="col"
+            [nzSortFn]="listOfColumn[6].compare"
+            [nzSortPriority]="listOfColumn[6].priority"
         >
-            {{listOfColumn[5].title}}
+            {{listOfColumn[6].title}}
             <nz-filter-trigger [(nzVisible)]="statusSearchVisible" [nzActive]="statusSearchValue.length > 0"
                                [nzDropdownMenu]="statusMenu">
                 <span nz-icon nzType="search"></span>
@@ -66,7 +66,7 @@
     <tr *ngFor="let checkout of table.data">
         <ng-container *ngIf="!editCache[checkout.id].edit; else editTemplate">
             <td>{{ checkout.id }}</td>
-            <td><a target="_blank" [href]="">{{ checkout.userId }}</a></td>
+            <td><a target="_blank" [href]="">{{ checkout.userEmail }}</a></td>
             <td>{{ checkout.bookCopy.id }}</td>
             <td><a target="_blank" [href]="'/book/' + checkout.bookCopy.book.id">{{ checkout.bookCopy.book.title }}</a>
             </td>
@@ -77,7 +77,7 @@
         </ng-container>
         <ng-template #editTemplate>
             <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.id"/></td>
-            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.userId"/></td>
+            <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.userEmail"/></td>
             <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.bookCopy.id"/></td>
             <td><input disabled type="text" nz-input [(ngModel)]="editCache[checkout.id].data.bookCopy.book.title"/>
             </td>

@@ -31,10 +31,10 @@ export class AllCheckoutsComponent {
             width: "8%"
         },
         {
-            title: 'User',
-            compare: (a: Checkout, b: Checkout) => a.userId - b.userId,
+            title: 'User email',
+            compare: (a: Checkout, b: Checkout) => a.userEmail.localeCompare(b.userEmail),
             priority: false,
-            width: "8%"
+            width: "15%"
         },
         {
             title: 'BC id',
@@ -52,13 +52,13 @@ export class AllCheckoutsComponent {
             title: 'Issue date',
             compare: (a: Checkout, b: Checkout) => new Date(a.issueDate).getTime() - new Date(b.issueDate).getTime(),
             priority: 1,
-            width: "15%"
+            width: "12%"
         },
         {
             title: 'Return date',
             compare: (a: Checkout, b: Checkout) => new Date(a.returnDate).getTime() - new Date(b.returnDate).getTime(),
             priority: 2,
-            width: "15%"
+            width: "12%"
         },
         {
             title: 'Status',
