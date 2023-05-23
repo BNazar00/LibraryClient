@@ -1,1 +1,6 @@
-<h1>Books</h1>
+<div *ngIf="books.length !== 0">
+    <app-books-table [title]="'All books'" [books]="books"/>
+</div>
+<div *ngIf="showNoData">
+    <app-no-data/>
+</div>

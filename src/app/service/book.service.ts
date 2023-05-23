@@ -19,6 +19,10 @@ export class BookService {
         return this.http.get<Book[]>(`${BASE_URL}/api/v1/book/admin/all`);
     }
 
+    getAllBookPreviewsOrderByCheckoutCount = () => {
+        return this.http.get<BookPreview[]>(`${BASE_URL}/api/v1/book/all`);
+    }
+
     getBookById = (id: number) => {
         return this.http.get<Book>(`${BASE_URL}/api/v1/book/${id}`);
     }

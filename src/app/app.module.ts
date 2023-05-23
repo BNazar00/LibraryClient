@@ -34,6 +34,7 @@ import {CheckoutComponent} from "./component/main/user/reader/checkout/checkout.
 import {CheckoutInfoComponent} from "./component/main/user/reader/checkout-info/checkout-info.component";
 import {ReaderGuard} from "./component/main/user/reader/reader.guard";
 import {AllCheckoutsComponent} from "./component/main/admin/all-checkouts/all-checkouts.component";
+import {BooksComponent} from "./component/main/home/books/books.component";
 
 registerLocaleData(en);
 const appRoute: Routes = [
@@ -44,9 +45,12 @@ const appRoute: Routes = [
             {path: "", component: HomeComponent},
             {path: "authors", component: AuthorsComponent},
 
-            {path: "book/:id", component: BookComponent},
-            {path: "book/checkout/:id", component: CheckoutComponent, canActivate: [ReaderGuard]},
             {path: "form-reader-ticket", component: FormReaderTicketComponent, canActivate: [UserGuard]},
+
+            {path: "book/:id", component: BookComponent},
+            {path: "all-books", component: BooksComponent},
+            {path: "book/checkout/:id", component: CheckoutComponent, canActivate: [ReaderGuard]},
+
             {path: "my-checkouts", component: MyCheckoutsComponent, canActivate: [ReaderGuard]},
             {path: "my-checkout/:id", component: CheckoutInfoComponent, canActivate: [ReaderGuard]},
 
