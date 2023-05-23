@@ -29,17 +29,36 @@
             <td>{{ book.title }}</td>
             <td>{{ book.publicationYear }}</td>
             <td>{{ book.pageCount }}</td>
+            <td>{{ book.copiesCount }}</td>
+            <td>{{ book.availableCount }}</td>
             <td>{{ book.price }}</td>
-            <td><a (click)="startEdit(book.id)">Edit</a><a>Delete</a></td>
+            <td><a (click)="startEdit(book.id)">Edit</a></td>
         </ng-container>
         <ng-template #editTemplate>
             <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.title"/></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.publicationYear"/></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.pageCount"/></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[book.id].data.price"/></td>
             <td>
-                <a (click)="saveEdit(book.id)" class="save">Save </a>
-                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(book.id)">Cancel</a>
+                <nz-input-number [(ngModel)]="editCache[book.id].data.publicationYear"/>
+            </td>
+            <td>
+                <nz-input-number [(ngModel)]="editCache[book.id].data.pageCount"/>
+            </td>
+            <td>
+                <nz-input-number disabled [(ngModel)]="editCache[book.id].data.copiesCount"/>
+            </td>
+            <td>
+                <nz-input-number disabled [(ngModel)]="editCache[book.id].data.availableCount"/>
+            </td>
+            <td>
+                <nz-input-number
+                    [nzMin]="0"
+                    [nzPrecision]="2"
+                    [(ngModel)]="editCache[book.id].data.price"/>
+            </td>
+            <td>
+                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to save?"
+                   (nzOnConfirm)="saveEdit(book.id)" class="save">Save </a>
+                <a nz-popconfirm="Ok" nzPopconfirmTitle="Sure to cancel?"
+                   (nzOnConfirm)="cancelEdit(book.id)">Cancel</a>
             </td>
         </ng-template>
     </tr>

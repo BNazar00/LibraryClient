@@ -5,10 +5,11 @@ export interface Book {
     id: number;
     title: string;
     author: AuthorPreview;
+    photoUrl: string;
     publisher: Publisher;
     publicationYear: number;
     pageCount: number;
-    photoUrl: string;
-    price: number;
     availableCount: number;
+    copiesCount: number;
+    price: number;
 }

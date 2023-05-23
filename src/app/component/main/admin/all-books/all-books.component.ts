@@ -21,22 +21,34 @@ export class AllBooksComponent {
             width: 25
         },
         {
-            title: 'publicationYear',
+            title: 'Publication year',
             compare: (a: Book, b: Book) => a.publicationYear - b.publicationYear,
             priority: 3,
             width: 15
         },
         {
-            title: 'pageCount',
+            title: 'Page count',
             compare: (a: Book, b: Book) => a.pageCount - b.pageCount,
             priority: 2,
-            width: 20
+            width: 10
         },
         {
-            title: 'price',
+            title: 'copiesCount',
+            compare: (a: Book, b: Book) => a.copiesCount - b.copiesCount,
+            priority: 2,
+            width: 10
+        },
+        {
+            title: 'availableCount',
+            compare: (a: Book, b: Book) => a.availableCount - b.availableCount,
+            priority: 2,
+            width: 10
+        },
+        {
+            title: 'Price',
             compare: (a: Book, b: Book) => a.price - b.price,
             priority: 1,
-            width: 20
+            width: 10
         }
     ];
     protected listOfData: Book[] = [];
@@ -70,9 +82,23 @@ export class AllBooksComponent {
     }
 
     protected saveEdit(id: number): void {
-        const index = this.listOfData.findIndex(item => item.id === id);
-        Object.assign(this.listOfData[index], this.editCache[id].data);
-        this.editCache[id].edit = false;
+        const book = this.editCache[id].data;
+
+        this.bookService.updateBook({
+            id: id,
+            publicationYear: book.publicationYear,
+            pageCount: book.pageCount,
+            price: book.price
+        }).subscribe({
+            next: () => {
+                const index = this.listOfData.findIndex(item => item.id === id);
+                Object.assign(this.listOfData[index], this.editCache[id].data);
+                this.editCache[id].edit = false;
+                this.message.success("Book was successfully saved!");
+            },
+            error: (err) => this.message.error("Error saving book, " + err.error.message)
+        })
+
     }
 
     private ngOnInit(): void {
